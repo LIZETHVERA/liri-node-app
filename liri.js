@@ -51,7 +51,7 @@ function spotifySong() {
     for (var i = 0; i < trackInfo.length; i++) {
 
       var artists = trackInfo[i].artists[0].name;
-      var album = trackInfo[i].album.sname;
+      var album = trackInfo[i].album.name;
       var songName = trackInfo[i].name;
       var previewLink = trackInfo[i].preview_url;
 
@@ -67,15 +67,22 @@ function spotifySong() {
 };
 
 function movieInfo() {
+ 
+ 
+    axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy").then(
+      function (response) {
+        // console.log(response);
+        // console.log(response.data.Ratings);
 
-  axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy").then(
-    function (response) {
-      // console.log(response);
-      console.log(response.data.Ratings);
+        console.log("Title of the movie:  " + response.data.Title);
+        console.log("year came out: " + response.data.Year);
+        console.log("IMDB Rating:  " + response.data.Ratings[0].Value);
+        console.log("Rotten Tomatoes:  " + response.data.Ratings[1].Value);
+        console.log("Country:  " + response.data.Country);
+        console.log("Language:  " + response.data.Language);
+        console.log("Plot:  " + response.data.Plot);
+        console.log("Actors: " + response.data.Actors);
+      }
+    );
 
-      console.log("Title of the movie:  " + response.data.Title);
-      console.log("year:  " + response.data.Year);
-      console.log("year:  " + response.data.Year);
-    }
-  );
 };
