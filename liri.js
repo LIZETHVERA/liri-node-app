@@ -32,7 +32,25 @@ switch (liriResponse) {
 
 function spotifySong() {
   // To get the access to Spotify API. 
-  spotify.search({ type: 'track', query: search, limit: 5 }, function (err, data) {
+
+  //This conditional is in case the user dont put any movie to search. We recommend Mr NoBody!
+  if (!search) {
+    // If the variable is diferent to search the variable now has the "Mr NoBody Name"
+    search = "the day that never comes metallica";
+    
+    console.log("---> You have not entered any songs, we recommend THE DAY THAT NEVER COMES BY METALLICA!");
+    console.log("---> These are the first three versions. Enjoy");
+   
+    console.log("\n-------------\n");
+  } else if (search){
+    
+    // Print in terminal a message for the user
+     console.log("---> These are the first three versions. Enjoy")
+     console.log("---> If you want a specific song try puting the artist name too:")
+     console.log("\n-------------\n");
+  };
+ 
+  spotify.search({ type: 'track', query: search, limit: 3 }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
@@ -42,10 +60,8 @@ function spotifySong() {
     var trackInfo = data.tracks.items;
     // console.log(JSON.stringify(trackInfo,null, 3));
 
-    // Print in terminal a message for the user. 
-    console.log(">>>>>Here are the first number five coincidences")
-    console.log(">>>>>If you want a specific song try puting the artist name too:")
-    console.log("\n-------------\n");
+   
+
 
     // For to iterate over the object length and bring the different options.
     for (var i = 0; i < trackInfo.length; i++) {
@@ -61,19 +77,29 @@ function spotifySong() {
       console.log("Preview Link: " + previewLink);
       console.log("\n-------------\n");
     }
-
+    
   });
+  
 
 };
 
 function movieInfo() {
- 
+
+  //This conditional is in case the user dont put any movie to search. We recommend Mr NoBody!
+  if (!search) {
+    // If the variable is diferent to search the variable now has the "Mr NoBody Name"
+    search = "Mr Nobody";
+    console.log("\n-------------\n");
+    console.log("---> You have not entered any movies, we recommend Mr Nobody!");
+    console.log("---> If you want you can search for a different movie by its name");
+    console.log("\n-------------\n");
+  };
  
     axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy").then(
       function (response) {
         // console.log(response);
         // console.log(response.data.Ratings);
-
+        console.log("\n-------------\n");
         console.log("Title of the movie:  " + response.data.Title);
         console.log("year came out: " + response.data.Year);
         console.log("IMDB Rating:  " + response.data.Ratings[0].Value);
