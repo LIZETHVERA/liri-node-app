@@ -6,6 +6,9 @@ var keys = require("./keys.js");
 // Importing keys from keys.js file. 
 var spotify = new Spotify(keys.spotify);
 
+var axios = require("axios");
+
+
 // concert-this
 // spotify-this-song
 // movie-this
@@ -19,6 +22,10 @@ var search = process.argv.slice(3).join(" ");
 switch (liriResponse) {
   case "spotify-this-song":
     spotifySong();
+    break;
+
+  case "movie-this":
+    movieInfo();
     break;
 };
 
@@ -44,7 +51,7 @@ function spotifySong() {
     for (var i = 0; i < trackInfo.length; i++) {
 
       var artists = trackInfo[i].artists[0].name;
-      var album = trackInfo[i].album.name;
+      var album = trackInfo[i].album.sname;
       var songName = trackInfo[i].name;
       var previewLink = trackInfo[i].preview_url;
 
@@ -57,4 +64,18 @@ function spotifySong() {
 
   });
 
+};
+
+function movieInfo() {
+
+  axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy").then(
+    function (response) {
+      // console.log(response);
+      console.log(response.data.Ratings);
+
+      console.log("Title of the movie:  " + response.data.Title);
+      console.log("year:  " + response.data.Year);
+      console.log("year:  " + response.data.Year);
+    }
+  );
 };
