@@ -3,7 +3,10 @@ require("dotenv").config();
 var Spotify = require('node-spotify-api');
 // The spotify key in another file to secure. 
 var keys = require("./keys.js");
+
+var moment = require('moment');
 // Importing keys from keys.js file. 
+
 var spotify = new Spotify(keys.spotify);
 
 var axios = require("axios");
@@ -26,10 +29,10 @@ switch (liriResponse) {
   case "movie-this":
     movieInfo();
     break;
-  
-    case "concert-this":
+
+  case "concert-this":
     bandsInTown();
-    break;  
+    break;
 };
 
 
@@ -120,10 +123,34 @@ function movieInfo() {
 function bandsInTown() {
 
   axios.get("https://rest.bandsintown.com/artists/" + search + "/events?app_id=943e8f5b-037a-453f-84bd-a9aa28593784").then(
-    function(response) {
-      
-      console.log(JSON.stringify(response.data, null, 2));
-    
+    function (response) {
+
+      // console.log(JSON.stringify(response.data, null, 2));
+      var concertInfo = response.data;
+
+      for (var i = 0; i < concertInfo.length; i++) {
+
+      var artist = concertInfo[i].artist_id;
+      var artistName = concertInfo[i].lineup[0];
+      var venueName= concertInfo[i].venue.name;
+      var country= concertInfo[i].venue.country;
+      var city= concertInfo[i].venue.city;
+      var date = concertInfo[i].datetime;
+      // I did not use "MM/DD/YYYY" as a format because i thing is easy to the user see the whole 
+      // date and the time of the concert
+      var dateMoment =  moment(date).format('MMMM Do YYYY, h:mm:ss a');
+      var tickets = concertInfo[i].offers[0].url;
+
+      console.log("Artist ID:  " + artist);
+      console.log("Artist Name:  " + artistName);
+      console.log("Venue Name:  " + venueName);
+      console.log("Country: " + country);
+      console.log("City:  " + city);
+      console.log("Date: " + dateMoment);
+      console.log("Tickets available here: " + tickets);
+
+      console.log("\n-------------");
+      }
     }
   );
 };
