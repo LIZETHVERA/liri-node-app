@@ -12,9 +12,11 @@ var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
 var fs = require('fs');
 
-//-------------ISSUES--------------------------------//
+//-------------COMMANDS IN RANDOM FILE--------------------------------//
 
 // do-what-it-says
+// spotify-this-song,I Want it That Way
+// movie-this,star wars
 
 
 
@@ -42,6 +44,7 @@ switch (liriResponse) {
 
 
 function spotifySong() {
+
   // To get the access to Spotify API. 
 
   //This conditional is in case the user dont put any movie to search. We recommend Mr NoBody!
@@ -194,11 +197,31 @@ function doWhatItSays() {
     console.log(data);
 
     liriResponse = data[0];
-    if (liriResponse === "spotify-this-song"){
+
+    if (liriResponse === "spotify-this-song") {
       search = (data[1]);
       spotifySong();
+    } else if (liriResponse === "concert-this") {
+      search = (data[1]);
+      bandsInTown();
+    } else if (liriResponse === "movie-this") {
+      search = (data[1]);
+      movieInfo();
     }
-    
   })
 }
 
+
+fs.appendFile("log.txt", liriResponse + " " + search + "\n", function(err) {
+
+  // If an error was experienced we will log it.
+  if (err) {
+    console.log(err);
+  }
+
+  // If no error is experienced, we'll log the phrase "Check the log File and you can see your lastes searches" to our node console.
+  else {
+    console.log("Check the log File and you can see your lastes searches!");
+  }
+
+});
