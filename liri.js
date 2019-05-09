@@ -10,11 +10,12 @@ var moment = require('moment');
 var spotify = new Spotify(keys.spotify);
 
 var axios = require("axios");
+var fs = require('fs');
 
 //-------------ISSUES--------------------------------//
 
 // do-what-it-says
-// Pending to put in case the song does not exist. 
+
 
 
 // How the user can search the song with space and another parameters. 
@@ -32,6 +33,10 @@ switch (liriResponse) {
 
   case "concert-this":
     bandsInTown();
+    break;
+
+  case "do-what-it-says":
+    doWhatItSays();
     break;
 };
 
@@ -115,8 +120,8 @@ function movieInfo() {
       console.log("Actors: " + response.data.Actors);
     }).catch(function (error) {
       // handle error
-      console.log(error + " --> something is wrong try again" );
-      
+      console.log(error + " --> something is wrong try again");
+
     }).finally(function () {
       // always executed
     });
@@ -129,10 +134,10 @@ function bandsInTown() {
     // If the variable is diferent to search the variable now has the " Madona concerts Name"
     search = "Madona";
 
-   console.log("\n---> You have not entered any artist or Band, We recommend to look some Madonna concerts!");
+    console.log("\n---> You have not entered any artist or Band, We recommend to look some Madonna concerts!");
   } else if (search) {
     // Print in terminal a message for the user
-    
+
   };
 
   axios.get("https://rest.bandsintown.com/artists/" + search + "/events?app_id=943e8f5b-037a-453f-84bd-a9aa28593784").then(
@@ -140,7 +145,7 @@ function bandsInTown() {
       // console.log(JSON.stringify(response.data, null, 2));
       var concertInfo = response.data;
 
-      if (concertInfo.length <= 0){
+      if (concertInfo.length <= 0) {
         console.log("OHH!!! So sorry seems like we do not have venues for the artist you entered :( Try with another one.");
       } else {
         console.log("---> Here is the venues available\n");
@@ -148,34 +153,52 @@ function bandsInTown() {
 
       for (var i = 0; i < concertInfo.length; i++) {
 
-      var artist = concertInfo[i].artist_id;
-      var artistName = concertInfo[i].lineup[0];
-      var venueName= concertInfo[i].venue.name;
-      var country= concertInfo[i].venue.country;
-      var city= concertInfo[i].venue.city;
-      var date = concertInfo[i].datetime;
-      // I did not use "MM/DD/YYYY" as a format because i thing is easy to the user see the whole 
-      // date and the time of the concert
-      var dateMoment =  moment(date).format('MMMM Do YYYY, h:mm:ss a');
-      var tickets = concertInfo[i].offers[0].url;
+        var artist = concertInfo[i].artist_id;
+        var artistName = concertInfo[i].lineup[0];
+        var venueName = concertInfo[i].venue.name;
+        var country = concertInfo[i].venue.country;
+        var city = concertInfo[i].venue.city;
+        var date = concertInfo[i].datetime;
+        // I did not use "MM/DD/YYYY" as a format because i thing is easy to the user see the whole 
+        // date and the time of the concert
+        var dateMoment = moment(date).format('MMMM Do YYYY, h:mm:ss a');
+        var tickets = concertInfo[i].offers[0].url;
 
-      console.log("Artist ID:  " + artist);
-      console.log("Artist Name:  " + artistName);
-      console.log("Venue Name:  " + venueName);
-      console.log("Country: " + country);
-      console.log("City:  " + city);
-      console.log("Date: " + dateMoment);
-      console.log("Tickets available here: " + tickets);
+        console.log("Artist ID:  " + artist);
+        console.log("Artist Name:  " + artistName);
+        console.log("Venue Name:  " + venueName);
+        console.log("Country: " + country);
+        console.log("City:  " + city);
+        console.log("Date: " + dateMoment);
+        console.log("Tickets available here: " + tickets);
 
-      console.log("\n-------------");
+        console.log("\n-------------");
       }
     }).catch(function (error) {
       // handle error
-      console.log(error + " --> something is wrong try again" );
-      
+      console.log(error + " --> something is wrong try again");
+
     }).finally(function () {
       // always executed
     });
-  
+
 };
+
+function doWhatItSays() {
+  fs.readFile('random.txt', 'utf8', function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+
+    data = data.split(',');
+    console.log(data);
+
+    liriResponse = data[0];
+    if (liriResponse === "spotify-this-song"){
+      search = (data[1]);
+      spotifySong();
+    }
+    
+  })
+}
 
