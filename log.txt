@@ -13,3 +13,15 @@ concert-this Madona
 concert-this jdsk
 do-what-it-says 
 movie-this the mule
+spotify-this-song hello
+spotify-this-song hello
+spotify-this-song the day that never comes metallica
+spotify-this-song hello adele
+spotify-this-song wda
+movie-this star wars
+movie-this Mr Nobody
+concert-this madona
+concert-this Madona
+do-what-it-says 
+concert-this dsf
+movie-this dsd

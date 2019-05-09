@@ -1,3 +1,12 @@
+//-------------COMMANDS IN RANDOM FILE--------------------------------//
+
+// do-what-it-says
+// spotify-this-song,I Want it That Way
+// movie-this,star wars
+// concert-this,madona
+
+
+
 require("dotenv").config();
 // The require package from npm. Previous install
 var Spotify = require('node-spotify-api');
@@ -12,11 +21,12 @@ var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
 var fs = require('fs');
 
-//-------------COMMANDS IN RANDOM FILE--------------------------------//
 
-// do-what-it-says
-// spotify-this-song,I Want it That Way
-// movie-this,star wars
+//-------------COMMANDS--------------------------------//
+//concert-this
+//spotify-this-song
+//movie-this
+//do-what-it-says
 
 
 
@@ -128,7 +138,6 @@ function movieInfo() {
     }).finally(function () {
       // always executed
     });
-
 };
 
 function bandsInTown() {
