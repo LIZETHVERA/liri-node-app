@@ -27,4 +27,10 @@ console.log("\n---> You have not entered any artist or Band, We recommend to loo
 ``` 
 
 ![image](https://github.com/LIZETHVERA/liri-node-app/blob/master/images/concertNo.JPG)
-  
+
+## node liri.js spotify-this-song <song / name here> :
+
+- We take Hello as an example
+- We are showing the first 3 options. 
+
+![image](https://github.com/LIZETHVERA/liri-node-app/blob/master/images/spotifySong.JPG)
