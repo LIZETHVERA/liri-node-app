@@ -11,14 +11,14 @@ Liri.js can take in one of the following commands:
 - movie-this
 - do-what-it-says
 
-# node liri.js concert-this <artist/band name here> : 
+## node liri.js concert-this <artist/band name here> : 
 
 - We take madonna as an example
 
 ![image](https://github.com/LIZETHVERA/liri-node-app/blob/master/images/concert.JPG)
 
 
-# node liri.js concert-this <no band or artist> : 
+## node liri.js concert-this <no band or artist> : 
   - When the user does not select anything: 
   - We put madonna as defaut. 
 
