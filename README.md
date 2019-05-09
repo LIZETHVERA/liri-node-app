@@ -11,6 +11,10 @@ Liri.js can take in one of the following commands:
 - movie-this
 - do-what-it-says
 
-# node liri.js concert-this : 
+# node liri.js concert-this <artist/band name here> : 
+
+```
+We take madona as an example
+```
 
 ![image](https://github.com/LIZETHVERA/liri-node-app/blob/master/images/concert.JPG)
