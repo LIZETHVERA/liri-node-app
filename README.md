@@ -25,5 +25,6 @@ Liri.js can take in one of the following commands:
 ```
 console.log("\n---> You have not entered any artist or Band, We recommend to look some Madonna concerts!");
 ``` 
- ![image] (https://github.com/LIZETHVERA/liri-node-app/blob/master/images/concertNo.JPG)
+
+![image](https://github.com/LIZETHVERA/liri-node-app/blob/master/images/concertNo.JPG)
   
