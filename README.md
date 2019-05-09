@@ -4,3 +4,12 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI will be a comm
 # LIRI
 
 1. LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies using APIs. 
+
+# Commands: 
+  
+Liri.js can take in one of the following commands:
+
+- concert-this
+- spotify-this-song
+- movie-this
+- do-what-it-says
