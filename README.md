@@ -10,3 +10,7 @@ Liri.js can take in one of the following commands:
 - spotify-this-song
 - movie-this
 - do-what-it-says
+
+# node liri.js concert-this : 
+
+![image](https://github.com/LIZETHVERA/liri-node-app/blob/master/images/concert.JPG)
