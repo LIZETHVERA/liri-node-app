@@ -12,7 +12,7 @@ var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
 
 //-------------ISSUES--------------------------------//
-// concert-this
+
 // do-what-it-says
 // Pending to put in case the song does not exist. 
 
@@ -96,9 +96,7 @@ function movieInfo() {
     console.log("\n---> If you want you can search for a different movie by its name");
     console.log("\n---> You have not entered any movies, we recommend Mr Nobody!\n");
   } else if (search) {
-
     // Print in terminal a message for the user
-
     console.log("\n ---> Here is the info for the movie you entered\n");
   };
 
@@ -115,18 +113,38 @@ function movieInfo() {
       console.log("Language:  " + response.data.Language);
       console.log("Plot:  " + response.data.Plot);
       console.log("Actors: " + response.data.Actors);
-    }
-  );
+    }).catch(function (error) {
+      // handle error
+      console.log(error + " --> something is wrong try again" );
+      
+    }).finally(function () {
+      // always executed
+    });
 
 };
 
 function bandsInTown() {
 
+  if (!search) {
+    // If the variable is diferent to search the variable now has the " Madona concerts Name"
+    search = "Madona";
+
+   console.log("\n---> You have not entered any artist or Band, We recommend to look some Madonna concerts!");
+  } else if (search) {
+    // Print in terminal a message for the user
+    
+  };
+
   axios.get("https://rest.bandsintown.com/artists/" + search + "/events?app_id=943e8f5b-037a-453f-84bd-a9aa28593784").then(
     function (response) {
-
       // console.log(JSON.stringify(response.data, null, 2));
       var concertInfo = response.data;
+
+      if (concertInfo.length <= 0){
+        console.log("OHH!!! So sorry seems like we do not have venues for the artist you entered :( Try with another one.");
+      } else {
+        console.log("---> Here is the venues available\n");
+      };
 
       for (var i = 0; i < concertInfo.length; i++) {
 
@@ -151,7 +169,13 @@ function bandsInTown() {
 
       console.log("\n-------------");
       }
-    }
-  );
+    }).catch(function (error) {
+      // handle error
+      console.log(error + " --> something is wrong try again" );
+      
+    }).finally(function () {
+      // always executed
+    });
+  
 };
 
